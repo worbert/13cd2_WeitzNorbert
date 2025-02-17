@@ -42,6 +42,18 @@ app.get("/v3", (req, res) => {
 }
 )
 
+app.post("/vuj", (req, res) => {
+    const sql = "INSERT INTO versenyzok (ID, versenyzo) VALUES (10,Kiss Botond)";
+    const values = [req.body.ID, req.body.versenyzo];
+    db.query(sql, (err, result) => {
+        if (err) return res.status(500).json({error: "Hibás adatbázis művelet!"});
+        return res.json(result);
+    }
+    )
+}
+)
+
+
 app.listen(3000, () => {
     console.log('A szerver a 3000 porton fut!')
 })
