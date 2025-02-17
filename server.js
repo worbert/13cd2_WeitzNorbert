@@ -16,14 +16,32 @@ const db = mysql.createConnection(
     }
 )
 
+
 // a szerver futásának ellenőrzése
 app.get("/", (req, res) => {
     res.send("A szerver működik!")
 }
-
 )
 
+app.get("/v", (req, res) => {
+    const sql = "SELECT * FROM `versenyzok`";
+    db.query(sql, (err, result) => {
+        if (err) return res.json(err);
+        return res.json(result);
+    }
+    )
+}
+)
+app.get("/v3", (req, res) => {
+    const sql = "SELECT * FROM `versenyzok` where ID = 3";
+    db.query(sql, (err, result) => {
+        if (err) return res.json(err);
+        return res.json(result);
+    }
+    )
+}
+)
 
-app.listen(3000, () =>{
+app.listen(3000, () => {
     console.log('A szerver a 3000 porton fut!')
 })
